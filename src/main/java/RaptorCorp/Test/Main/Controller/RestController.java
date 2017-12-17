@@ -1,6 +1,5 @@
 package RaptorCorp.Test.Main.Controller;
 
-import org.springframework.boot.ApplicationArguments;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +11,7 @@ import RaptorCorp.Test.Main.Model.TestModelPojo;
 @RequestMapping(value="/test")
 public class RestController {
 	
-	@RequestMapping(value="/all",method=RequestMethod.GET, consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE )
+	@RequestMapping(value="/all",method=RequestMethod.GET, consumes= "application/json",produces="application/json",headers="content-type=application/json")
 	public TestModelPojo getTestModel() {
 		TestModel tm1 = new TestModel();
 		tm1.setName("nitin");
@@ -29,10 +28,12 @@ public class RestController {
 		TestModelPojo tmp = new TestModelPojo();
 		TestModel tma[] = {tm1,tm2,tm3};
 		tmp.setArrayModel(tma);
+		System.out.println("test");
 		return tmp;
+		
 	}
 	
-	@RequestMapping(value="/store",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE )
+	@RequestMapping(value="/store",method=RequestMethod.POST,consumes= "application/json",produces={"application/json"})
 	public String getPostTest(@RequestBody TestModel tm) {
 		System.out.println(tm);
 		return "Test model posted successfully";
